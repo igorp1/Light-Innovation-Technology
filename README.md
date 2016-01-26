@@ -1,0 +1,2 @@
+# Light-Innovation-Technology
+Our project is an LED light bulb whose output light field can be controlled by its user. Our light bulb will make use of the following systems: a flexible tube with a reflective interior coating to control the width and direction of the light leaving the LED, a system of micro servos to control the tube’s motion, a microprocessor to control the micro servos, and a smartphone app to send user commands to the microprocessor.
