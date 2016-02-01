@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="assets/ico/favicon.png">
 
-    <title>SPOT - Free Bootstrap 3 Theme</title>
+    <title>-- LIT --</title>
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -36,14 +36,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">SP<i class="fa fa-circle"></i>T</a>
+          <a class="navbar-brand" href="#">LIT: light on the SP<i class="fa fa-circle"></i>T</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="index.html">HOME</a></li>
-            <li><a href="about.html">ABOUT</a></li>
-            <li><a href="services.html">SERVICES</a></li>
-            <li><a href="works.html">WORKS</a></li>
             <li><a data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-envelope-o"></i></a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -54,8 +50,8 @@
 		<div class="container">
 			<div class="row centered">
 				<div class="col-lg-8 col-lg-offset-2">
-				<h1>It Doesn't Take a Rocket <b>Scientist</b></h1>
-				<h2>It Takes a Designer</h2>
+				<h1>LIT</h1>
+				<h2>Light where you need it, always.</h2>
 				</div>
 			</div><!-- row -->
 		</div><!-- container -->
@@ -68,19 +64,19 @@
 			<div class="col-lg-4">
 				<i class="fa fa-heart"></i>
 				<h4>DESIGN</h4>
-				<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p>
+				<p>From the encasing, to the control system, LED board, live server and the main board, everything was carefully thought about to achieve the best product we can put together.</p>
 			</div><!-- col-lg-4 -->
 
 			<div class="col-lg-4">
 				<i class="fa fa-laptop"></i>
-				<h4>BOOTSTRAP</h4>
-				<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p>
+				<h4>SOFTWARE</h4>
+				<p>Our software is not ony beautiful under the hood but it is also robust, easy to use and completely secure. The best practices and documentation of our server back-end and our firmware will be avaiable on github and fully documented.</p>
 			</div><!-- col-lg-4 -->
 
 			<div class="col-lg-4">
 				<i class="fa fa-trophy"></i>
-				<h4>SUPPORT</h4>
-				<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p>
+				<h4>CONTROL</h4>
+				<p>Our unique control system re-invents how light can be directed from your smartphone. The flexible tuble with relective inner coating can bend and stretch so you achive perfect directionand width of the light beam.</p>
 			</div><!-- col-lg-4 -->
 		</div><!-- row -->
 		<br>
@@ -88,93 +84,46 @@
 	</div><!-- container -->
 
 
-	<!-- PORTFOLIO SECTION -->
-	<div id="dg">
-		<div class="container">
-			<div class="row centered">
-				<h4>LATEST WORKS</h4>
-				<br>
-				<div class="col-lg-4">
-					<div class="tilt">
-					<a href="#"><img src="assets/img/p01.png" alt=""></a>
-					</div>
-				</div>
 
-				<div class="col-lg-4">
-					<div class="tilt">
-					<a href="#"><img src="assets/img/p03.png" alt=""></a>
-					</div>
-				</div>
-
-				<div class="col-lg-4">
-					<div class="tilt">
-					<a href="#"><img src="assets/img/p02.png" alt=""></a>
-					</div>
-				</div>
-			</div><!-- row -->
-		</div><!-- container -->
-	</div><!-- DG -->
 
 
 	<!-- FEATURE SECTION -->
-	<div class="container wb">
+	<div class="container wb" style="bottom:0;">
 		<div class="row centered">
 			<br><br>
 			<div class="col-lg-8 col-lg-offset-2">
-				<h4>WE CREATE FIRST CLASS DESIGN</h4>
-				<p>By being true to the brand we represent, we elevate the audiences’ relationship to it. Like becomes love becomes a passion. Passion becomes advocacy. And we see the brand blossom from within, creating a whole story the audience embraces. That’s when the brand can truly flex its muscles.</p>
+				<h4>And let there be light!</h4>
+				<p>Our team is creating an LED light bulb which fits into a standard household light socket and which can be remotely controlled in order to resize and reposition the output light.</p>
 			<p><br/><br/></p>
 			</div>
 			<div class="col-lg-2"></div>
 			<div class="col-lg-10 col-lg-offset-1">
-				<img class="img-responsive" src="assets/img/munter.png" alt="">
+				<img class="img-responsive" src="assets/img/screen-shot-1.jpg" alt="">
 			</div>
 		</div><!-- row -->
 	</div><!-- container -->
 
 
-	<div id="lg">
-		<div class="container">
-			<div class="row centered">
-				<h4>OUR AWESOME CLIENTS</h4>
-				<div class="col-lg-2 col-lg-offset-1">
-					<img src="assets/img/c01.gif" alt="">
-				</div>
-				<div class="col-lg-2">
-					<img src="assets/img/c02.gif" alt="">
-				</div>
-				<div class="col-lg-2">
-					<img src="assets/img/c03.gif" alt="">
-				</div>
-				<div class="col-lg-2">
-					<img src="assets/img/c04.gif" alt="">
-				</div>
-				<div class="col-lg-2">
-					<img src="assets/img/c05.gif" alt="">
-				</div>
-			</div><!-- row -->
-		</div><!-- container -->
-	</div><!-- dg -->
-	
-	
+
+
 	<div id="r">
 		<div class="container">
 			<div class="row centered">
 				<div class="col-lg-8 col-lg-offset-2">
-					<h4>WE ARE STORYTELLERS. BRANDS ARE OUR SUBJECTS. DESIGN IS OUR VOICE.</h4>
-					<p>We believe ideas come from everyone, everywhere. At BlackTie, everyone within our agency walls is a designer in their own right. And there are a few principles we believe—and we believe everyone should believe—about our design craft. These truths drive us, motivate us, and ultimately help us redefine the power of design.</p>
+					<h4>ABOUT US</h4>
+					<p>We are a group of Computer and Electrical Engineers from Boston University. Our focus is to develop great hardware that is seaminglessly integrated to our daily lives. We build software that is intuitive to use so you can take control of our product with the swipe of a finger.</p>
 				</div>
 			</div><!-- row -->
 		</div><!-- container -->
-	</div><! -- r wrap -->
-	
-	
+	</div><! -- wrap -->
+
+
 	<!-- FOOTER -->
 	<div id="f">
 		<div class="container">
 			<div class="row centered">
-				<a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-dribbble"></i></a>
-		
+				<a href="https://github.com/igorp1/Light-Innovation-Technology"><i class="fa fa-github"></i></a>
+
 			</div><!-- row -->
 		</div><!-- container -->
 	</div><!-- Footer -->
@@ -191,20 +140,29 @@
 	      </div>
 	      <div class="modal-body">
 		        <div class="row centered">
-		        	<p>We are available 24/7, so don't hesitate to contact us.</p>
+		        	<p>Don't hesitate to contact us.</p>
 		        	<p>
-		        		Somestreet Ave, 987<br/>
-						London, UK.<br/>
-						+44 8948-4343<br/>
-						hi@blacktie.co
+		        		Boston University<br/>
+						    Boston, MA.<br/>
+                <br>
+  						Software Development | igorp@bu.edu<br>
+              Electrical Engineering | wmy1993@bu.edu<br>
+              LED and Machining | cortezm@bu.edu<br>
+              Firmware &amp; control system | crism@bu.edu<br>
+              Main board Designer | benmoll@bu.edu<br>
+<br>
+              <a href="https://github.com/igorp1/Light-Innovation-Technology"><i class="fa fa-github"></i></a>
+
+
+
 		        	</p>
 		        	<div id="mapwrap">
-		<iframe height="300" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.es/maps?t=m&amp;ie=UTF8&amp;ll=52.752693,22.791016&amp;spn=67.34552,156.972656&amp;z=2&amp;output=embed"></iframe>
-					</div>	
+
+              </div>
 		        </div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-danger" data-dismiss="modal">Save & Go</button>
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">Exit</button>
 	      </div>
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
