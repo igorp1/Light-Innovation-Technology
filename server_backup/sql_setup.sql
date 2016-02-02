@@ -13,7 +13,7 @@ CREATE TABLE units(
 CREATE TABLE users(
   id int NOT NULL AUTO_INCREMENT,
   email varchar(50),
-  password varchar(30),
+  password varchar(32),
   username varchar(30),
   PRIMARY KEY (id)
 )
