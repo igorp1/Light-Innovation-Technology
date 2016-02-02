@@ -1,5 +1,24 @@
 <?php
 
+/************ The controller: **************/
+function getController($id){
+$str = <<<EOF
+  <button type="button" class="btn btn-info btn-md" id="B_lit_{$id}" data-toggle="modal" data-target="#ctrModal">Control <i class="fa fa-lightbulb-o"></i></button>
+EOF;
+
+return $str;
+
+}
+/******************************************/
+
+
+
+require("./assets/helpers.php");
+$host = "localhost";        // aka: server83.web-hosting.com
+$user = "igorrxbi_SD";      // username for our database
+$pass = "zYa-2T4-M4U-HK2";  // super secret password for db
+$db   = "igorrxbi_SD";      // table name for senior design
+
 session_start();
 
 // check if there is a session:
@@ -57,7 +76,7 @@ if( !isset($_SESSION[user_id]) ){
       <!--  -->
       <h3>Quick control_ </h3>
       <p>Take control of your <strong>devices</strong> from here.</p>
-
+      <br>
       <?php
 
       // CONNECT MYSQL
@@ -69,80 +88,87 @@ if( !isset($_SESSION[user_id]) ){
       }
 
       /* write up query and parameters */
-      $sql = "SELECT * FROM units WHERE user_id = ?";
+      $sql = "SELECT name, addr, id, position_x, position_y, status FROM `units` WHERE owner=?";
 
       /* WHICH USER DO YOU WANT: */
-      $user_id = rand(1,6);
+      $user_id = $_SESSION["user_id"];
 
-
+      //
       /* prepare statement( $stmt ) */
       if( $stmt = $mysqli->prepare($sql) ){
-
+      //
         // objective:
         $stmt->mbind_param('d',$user_id);
         $stmt->execute();
 
-
         $stmt->store_result();
         /* bind variables to prepared statement */
-        $stmt->bind_result($col1, $col2, $col3, $col4, $col5);
+        $stmt->bind_result($name,$addr, $device_id, $position_x, $position_y, $status);
         /* fetch values */
-        printf("<table>");
-        printf("<tr>");
-        printf("<th>id</th>");
-        printf("<th>username</th>");
-        printf("<th>password</th>");
-        printf("<th>email</th>");
-        printf("<th>xtra</th>");
 
-
+        echo '<div style="font-size:22px;" id="D_lit_">';
         while ($stmt->fetch()) {
-             printf("<tr>");
-             printf("<td>%s</td>", $col1);
-             printf("<td>%s</td>", $col2);
-             printf("<td>%s%s</td>", substr($col3,0,1), str_repeat("*", strlen($col3) - 1));
-             printf("<td>%s</td>", $col4);
-             printf("<td>%s</td>", $col5);
-             printf("</tr>");
-         }
+          // start row:
+          echo '<div class="row" style="padding:5px;border-bottom: 2px solid #EEE;">';
 
-         printf("</tables>");
+          // checkbox
+          echo '<div class="col-md-1" align="center">';
+          echo '<input type="checkbox" id=C_lit_' . $device_id . ">";
+          echo '</div>';
+
+          // device "name"
+          echo '<div class="col-md-2" align="left">';
+          echo $name;
+          echo '</div>';
+
+          // device "ip"
+          echo '<div class="col-md-1" align="left">';
+          echo $addr;
+          echo '</div>';
+
+          // device status
+          echo '<div class="col-md-1" align="center">';
+          if($status == 1) { echo '<i class="fa fa-bullseye" style="color:#00ff55"></i>'; }
+          elseif ($status == 2) { echo '<i class="fa fa-bullseye" style="color:#1a8cff"></i>'; }
+          elseif ($status == 3) { echo '<i class="fa fa-bullseye" style="color:#ff3333"></i>'; }
+          echo '</div>';
+
+          // X and Y positions
+          echo '<div class="col-md-1" align="center">';
+          echo $position_x;
+          echo '</div>';
+          echo '<div class="col-md-1" align="center">';
+          echo $position_y;
+          echo '</div>';
+
+          // the controller for the device
+          echo '<div class="col-md-3" align="left">';
+          echo getController($device_id);
+          echo '</div>';
+          echo "</div>";
+        }
+        echo '</div>';
+
         $stmt->close();
-
       }
       else{
         echo 'Error: ' . $mysqli->error;
         return false;
       }
-
-
-
-      # populate this row with devices:
-      $c = 1;
-      while(true){
-        echo '<div class="row">';
-        echo '<div class="col-md-1">';
-        echo "[ ]";
-        echo '</div>';
-        echo '<div class="col-md-1">';
-        echo "Device " . $c;
-        echo '</div>';
-        echo '<div class="col-md-1">';
-        echo "STUFF 1";
-        echo '</div>';
-        echo '<div class="col-md-1">';
-        echo "STUFF 2";
-        echo '</div>';
-        echo '<div class="col-md-1">';
-        echo "STUFF 3";
-        echo '</div>';
-        echo "</div>";
-
-        if($c++ == 10){ break; }
-
-      }
-
       ?>
+
+      <br><br>
+      <h3>Group Setup_ </h3>
+      <p>You can control <strong>multiple</strong> devices and store setups to use later.</p>
+      <br><br>
+        <div class="row">
+          <div class="col-md-4">
+            wait on it...
+          </div>
+        </div>
+      </div>
+
+
 
 
 </div>
@@ -170,7 +196,7 @@ if( !isset($_SESSION[user_id]) ){
 </div>
 <!---------------------------------------------------------------->
 
-<!--------------- ADD DEVICE --------------->
+<!--------------- MODAL FOR ADD DEVICE --------------->
 <div id="addModal" class="modal fade" role="dialog">
 <div class="modal-dialog">
 
@@ -189,7 +215,7 @@ if( !isset($_SESSION[user_id]) ){
 </div>
 <!---------------------------------------------------------------->
 
-<!--------------- ABOUT --------------->
+<!--------------- MODAL FOR ABOUT --------------->
 <div id="abtModal" class="modal fade" role="dialog">
 <div class="modal-dialog">
 
@@ -200,21 +226,19 @@ if( !isset($_SESSION[user_id]) ){
       <h4 class="modal-title">About</h4>
     </div>
     <div class="modal-body">
-      <p><strong>The control</strong></p><br>
+      <p><strong>The control</strong></p>
       <p>Move the yellow circle around the grey one. As you move it around, the ligh direction will replicate the direction you moved the circle towards.</p><br>
       <img src="" height="" width="">
       <br>
+
+      <p><strong>The status</strong></p>
+      <p>There are a few possible status options for the lights.</p>
+      <p>- OK: your device is up and running.&nbsp;<i class="fa fa-bullseye" style="color:#00ff55"></i></p>
+      <p>- OFF: just flip the switch and we are good to go.&nbsp;<i class="fa fa-bullseye" style="color:#1a8cff"></i></p>
+      <p>- UNREACHABLE: we are having a connectivity issue.&nbsp;<i class="fa fa-bullseye" style="color:#ff3333"></i></p>
       <br>
 
-      <p><strong>The status</strong></p><br>
-      <p>There are a few possible status options for the lights.</p><br>
-      <p>- OK: your device is up and running.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-circle" style="color:#00ff55"></i></p>
-      <p>- OFF: just flip the switch and we are good to go.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-circle" style="color:#1a8cff"></i></p>
-      <p>- UNREACHABLE: we are having a connectivity issue.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-circle" style="color:#ff3333"></i></p>
-      <br>
-      <br>
-
-      <p><strong>The Groups</strong></p><br>
+      <p><strong>The Groups</strong></p>
       <p>At the bottom you will find controls to act on a collection of devices.
         You can use those controls to setup groups of devices and create defined layouts.
         Groups could also be used to quickly used to control several lights at the same time.
@@ -223,9 +247,6 @@ if( !isset($_SESSION[user_id]) ){
         <a target="_blank" href="https://docs.google.com/document/d/1WhqY5YRCtOqpnpdnvNsOofP2qyVHINs9XAyrwVNl3Xo/edit?usp=sharing">I need more help.</a>
       </div>
     </div>
-    <!-- <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-sign-out"></i></button>
-    </div> -->
   </div>
 
 </div>
@@ -233,6 +254,26 @@ if( !isset($_SESSION[user_id]) ){
 <!---------------------------------------------------------------->
 
 
+<!------------------------ MODAL FOR CONTROLLER ----------------------->
+<div id="ctrModal" class="modal fade" role="dialog">
+<div class="modal-dialog">
+
+  <!-- Modal content-->
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">Control</h4>
+    </div>
+    <div class="modal-body">
+      <!-- SOME CRAZY ABOUT TO GO HERE -->
+      ;)
+      <!--------------------------------->
+    </div>
+  </div>
+
+</div>
+</div>
+<!--------------------------------------------------------------------->
 
 
 
