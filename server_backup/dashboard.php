@@ -3,7 +3,9 @@
 /************ The controller: **************/
 function getController($id){
 $str = <<<EOF
-  <button type="button" class="btn btn-info btn-md" id="B_lit_{$id}" data-toggle="modal" data-target="#ctrModal">Control <i class="fa fa-lightbulb-o"></i></button>
+  <button type="button" class="btn btn-info btn-md" id="B_lit_{$id}" data-toggle="modal" data-target="#ctrModal" onclick="fetchID(this)">
+    <i class="fa fa-lightbulb-o"></i>&nbsp;Control
+  </button>
 EOF;
 
 return $str;
@@ -13,11 +15,8 @@ return $str;
 
 
 
-require("./assets/helpers.php");
-$host = "localhost";        // aka: server83.web-hosting.com
-$user = "igorrxbi_SD";      // username for our database
-$pass = "zYa-2T4-M4U-HK2";  // super secret password for db
-$db   = "igorrxbi_SD";      // table name for senior design
+require("./assets/php/helpers.php");
+require("./assets/php/variables.php");
 
 session_start();
 
@@ -33,14 +32,17 @@ if( !isset($_SESSION[user_id]) ){
 
 <HTML>
   <head>
+    <title>-- LIT: dashboard --</title>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://igordepaula.com/projects/demo/senior_design/assets/js/jquery.knob.js"></script>
+    <script src="http://igordepaula.com/projects/demo/senior_design/assets/js/underscore.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-
-    <title>-- LIT: dashboard --</title>
   </head>
 
   <body style="background-color:#FFF; font-family: 'Raleway', sans-serif; ">
@@ -80,7 +82,7 @@ if( !isset($_SESSION[user_id]) ){
       <?php
 
       // CONNECT MYSQL
-      $mysqli = new db($host, $user, $pass, $db);
+      $mysqli = new db($_db_host , $_db_user, $_db_pass, $_db_database);
       /* stablish and check connection */
       if (mysqli_connect_errno()) {
           printf("Connect failed: %s\n", mysqli_connect_error());
@@ -159,12 +161,43 @@ if( !isset($_SESSION[user_id]) ){
 
       <br><br>
       <h3>Group Setup_ </h3>
-      <p>You can control <strong>multiple</strong> devices and store setups to use later.</p>
-      <br><br>
+      <p><strong>All</strong> your devices in one place.</p><br>
         <div class="row">
-          <div class="col-md-4">
-            wait on it...
+          <div class="col-md-1"></div>
+          <div class="col-md-3" style="border-left-style: solid;border-left-color: #2389af">
+            <p>
+              <button type="button" class="btn btn-info btn-md" id="G_lit_" data-toggle="modal" data-target="#ctrModal" onclick="fetchID(this)">
+                <i class="fa fa-arrows"></i>&nbsp;Move
+              </button>
+            </p>
+            <p>
+              <button type="button" class="btn btn-info btn-md" id="G_lit_" data-toggle="modal" data-target="#ctrModal" onclick="fetchID(this)">
+                <i class="fa fa-sitemap"></i>&nbsp;Group
+              </button>
+            </p>
+            <p>
+              <button type="button" class="btn btn-info btn-md" id="G_lit_" data-toggle="modal" data-target="#ctrModal" onclick="fetchID(this)">
+                <i class="fa fa-trash-o"></i>&nbsp;Delete
+              </button>
+            </p>
+
+
           </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-4" style="border-left-style: solid;border-left-color: #2389af">
+            <p>Your groups: </p>
+            <?php
+
+            $a = array('Chill' => array(1, 3, 5, 6), 'Dinner' => array(2,4,6,9));
+            foreach ($a as $key => $value) {
+              echo $key . " : ";
+              print_r($value);
+              echo "<br>";
+            }
+
+             ?>
+          </div>
+          <div class="col-md-2"></div>
         </div>
       </div>
 
@@ -173,6 +206,10 @@ if( !isset($_SESSION[user_id]) ){
 
 </div>
 
+<br><br><br><br>
+<div style="font-size:10px;text-align:right;padding-right:10px;">
+<p>Sftwr dev <a target="_blank" href="http://igordepaula.com">@idp</a></p>
+</div>
   </body>
 
   <!--------------- MODAL FOR ACCOUNT MANAGEMENT --------------->
@@ -207,7 +244,7 @@ if( !isset($_SESSION[user_id]) ){
       <h4 class="modal-title">New device</h4>
     </div>
     <div class="modal-body">
-      <p> wait on it.</p>
+      <p></p>
     </div>
   </div>
 
@@ -227,8 +264,8 @@ if( !isset($_SESSION[user_id]) ){
     </div>
     <div class="modal-body">
       <p><strong>The control</strong></p>
-      <p>Move the yellow circle around the grey one. As you move it around, the ligh direction will replicate the direction you moved the circle towards.</p><br>
-      <img src="" height="" width="">
+      <p>Move the yellow circle around the grey one. As you move it around, the ligh direction will replicate the direction you moved the circle towards.</p>
+      <center><img src="http://igordepaula.com/projects/demo/senior_design/assets/img/controller.png" height="" width="60%" style="box-shadow: 10px 10px 5px #BBBBBB;"></center>
       <br>
 
       <p><strong>The status</strong></p>
@@ -262,11 +299,62 @@ if( !isset($_SESSION[user_id]) ){
   <div class="modal-content">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal">&times;</button>
-      <h4 class="modal-title">Control</h4>
+      <h4 class="modal-title" id="control_modal_title">Control</h4>
     </div>
-    <div class="modal-body">
-      <!-- SOME CRAZY ABOUT TO GO HERE -->
-      ;)
+    <div id="modal_ctrl_body" class="modal-body">
+      <!-- SOME CRAZY ABOUT TO GO HERE FOR THE CONTROLLER-->
+      <center>
+        <table>
+        <tr >
+          <th style="padding:20px">
+            <input type="text" class="dial" id="X-axis"
+              value="0"
+              data-thickness=".3"
+              data-linecap=round
+              data-cursor=true
+              data-step="5"
+              data-min="-100"
+              data-max="100"
+              data-width="200"
+            ><br>
+          </th>
+          <th style="padding:20px">
+            <input type="text" class="dial" id="Y-axis"
+              value="0"
+              data-thickness=".3"
+              data-linecap=round
+              data-cursor=true
+              data-step="5"
+              data-min="-100"
+              data-max="100"
+              data-width="200"
+            ><br>
+          </th>
+        </tr>
+        <tr>
+          <td><center>X</center></td>
+          <td><center>Y</center></td>
+        </tr>
+      </table>
+      </center>
+
+
+      <br>
+      <center>
+
+      <input type="text" class="dial"
+        value="0"
+        data-linecap=round
+        data-cursor=true
+        data-step="1"
+        data-min="0"
+        data-max="10"
+        data-width="150"
+        data-thickness=".3"
+        data-fgColor="#AAAAAA"
+        data-bgColor="#EEEEEE"
+      ><br>Size
+    </center>
       <!--------------------------------->
     </div>
   </div>
@@ -276,5 +364,79 @@ if( !isset($_SESSION[user_id]) ){
 <!--------------------------------------------------------------------->
 
 
+<!---------------------- JAVASCRIPT RIGHT HERE ------------------------>
+<script>
+
+/********* CONTROL VARIABLES ***********/
+var control_signal = {
+  u: [],                  //      # control units IDs on db
+  x_position: 0,          //      # y position of beam
+  y_position: 0,          //      # x position of beam
+  beam_width: 0,          //      # width of the beam
+};
+/***************************************/
+
+/************* TIMER FOR SENDING CTRL VALUES ******************/
+var redirect=_.debounce(function() {
+    /* AJAX REQUEST GOES HERE */
+    $.post( "/assets/js/", control_signal)
+  .done(function( data ) {
+    alert( "Data Loaded: " + data );
+  });
+    /**************************/
+},2000); // waits 2 seconds before sending the ajax
+/*************************************************/
+
+/***************** CONTROL DIALS ******************/
+$(function() {
+    $(".dial").knob({
+      'release' : function (v) {
+        redirect();
+     }
+    });
+});
+/************************************************/
+
+/****************** OPEN MODAL *****************/
+function fetchID(b){
+
+  // check where the modal was open:
+  if($(b)[0].id[0] == "B"){
+
+    // get value from textbox
+    var row = $(b).parent().parent()
+    var element = row.children()[0];
+    var selected = element.children[0].checked;
+    var id_num = element.children[0].id;
+
+    // get unit name
+    var name_unit = row.children()[1].innerHTML;
+
+    // set the info on the modal title
+    $("#control_modal_title")[0].innerHTML = "<strong>Control_</strong> " + name_unit;
+
+    // define a couple control variables
+    control_state = "single"; // controlling a single device
+    control_units = parseInt(id_num.replace("C_lit_",""));
+
+    // populate control_signal
+    control_signal.u = control_units;
+
+  }else if ($(b)[0].id[0] == "G") {
+
+
+  }
+
+
+
+
+
+
+
+}
+/************************************************/
+
+
+</script>
 
 </HTML>

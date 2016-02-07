@@ -94,11 +94,13 @@
 			<div class="col-lg-8 col-lg-offset-2">
 				<h4>And let there be light!</h4>
 				<p>Our team is creating an LED light bulb which fits into a standard household light socket and which can be remotely controlled in order to resize and reposition the output light.</p>
-			<p><br/><br/></p>
+			<p>
+        <a href="http://igordepaula.com/projects/demo/senior_design/dashboard.php">Go to dashboard_</a>
+        <br/></p>
 			</div>
 			<div class="col-lg-2"></div>
 			<div class="col-lg-10 col-lg-offset-1">
-				<img class="img-responsive" src="assets/img/screen-shot-1.jpg" alt="">
+				<img class="img-responsive" src="assets/img/dashboard.png" alt="">
 			</div>
 		</div><!-- row -->
 	</div><!-- container -->

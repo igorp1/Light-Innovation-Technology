@@ -1,13 +1,10 @@
 <?php
 
-require("./assets/helpers.php");
+require("./assets/php/helpers.php");
+require("./assets/php/variables.php");
 
-$host = "localhost";        // aka: server83.web-hosting.com
-$user = "igorrxbi_SD";      // username for our database
-$pass = "zYa-2T4-M4U-HK2";  // super secret password for db
-$db   = "igorrxbi_SD";      // table name for senior design
 
-$mysqli = new db($host, $user, $pass, $db);
+$mysqli = new db($_db_host, $_db_user, $_db_pass, $_db_database);
 /* stablish and check connection */
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
