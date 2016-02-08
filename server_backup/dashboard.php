@@ -187,13 +187,68 @@ if( !isset($_SESSION[user_id]) ){
           <div class="col-md-4" style="border-left-style: solid;border-left-color: #2389af">
             <p>Your groups: </p>
             <?php
+              # code ...
+              /*
+              Sample on inner join:
 
-            $a = array('Chill' => array(1, 3, 5, 6), 'Dinner' => array(2,4,6,9));
-            foreach ($a as $key => $value) {
-              echo $key . " : ";
-              print_r($value);
-              echo "<br>";
-            }
+              SELECT s.id, s.name, sp.unit_id, sp.pos_X, sp.pos_y, sp.width FROM setups AS s
+              INNER JOIN setup_positions AS sp
+              ON sp.setup_id = s.id
+
+              */
+              // CONNECT MYSQL
+              $mysqli = new db($_db_host , $_db_user, $_db_pass, $_db_database);
+              /* stablish and check connection */
+              if (mysqli_connect_errno()) {
+                  printf("Connect failed: %s\n", mysqli_connect_error());
+                  exit();
+              }
+
+              /* write up query and parameters */
+              $sql = "SELECT id, name FROM `setups` WHERE owner=?";
+
+              /* WHICH USER DO YOU WANT: */
+              $user_id = $_SESSION["user_id"];
+
+              //
+              /* prepare statement( $stmt ) */
+              if( $stmt = $mysqli->prepare($sql) ){
+              //
+                // objective:
+                $stmt->mbind_param('d',$user_id);
+                $stmt->execute();
+
+                $stmt->store_result();
+                /* bind variables to prepared statement */
+                $stmt->bind_result($setup_id, $setup_name);
+
+
+                /* fetch values */
+                $c = 0;
+                while ($stmt->fetch()) {
+
+                echo "<div class='row'>";
+                echo "<div class='col-md-3'><p><strong>{$setup_name}</strong></div>";
+
+                echo "<div class='col-md-3'><button type='button' class='btn btn-info btn-sm' id='S_lit_{$setup_id}' data-toggle='modal' data-target='#' onclick=''>";
+                echo '<i class="fa fa-caret-square-o-right"></i></button></p></div>';
+                echo '</div>';
+
+
+                  $c++;
+                }
+
+                if($c == 0){
+                  echo 'To create a group just choose the action &nbsp;&nbsp;<i class="fa fa-sitemap"></i>&nbsp;<i>Group</i>';
+                }
+
+                $stmt->close();
+
+              }else{
+                echo 'Error: ' . $mysqli->error;
+                return false;
+              }
+
 
              ?>
           </div>
@@ -426,12 +481,6 @@ function fetchID(b){
 
 
   }
-
-
-
-
-
-
 
 }
 /************************************************/
